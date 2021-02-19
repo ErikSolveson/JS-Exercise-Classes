@@ -147,6 +147,9 @@ class Instructor extends Lambdasian {
   grade(studentObj, subject) {
     return `${studentObj.name} receives a perfect score on ${subject}`;
   }
+  adjustGrade(studentObj) {
+    studentObj.grade += Math.random;
+  }
 }
 /*
     TASK 5
@@ -163,7 +166,31 @@ class Instructor extends Lambdasian {
           + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
           + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
   */
-class Student {}
+class Student extends Lambdasian {
+  constructor(args) {
+    super(args);
+    this.previousBackground = args.previousBackground;
+    this.className = args.className;
+    this.favSubjects = args.favSubjects;
+    this.grade = Math.round(Math.random() * 100);
+  }
+  listSubjects() {
+    return this.favSubjects.toString();
+  }
+  PRAssignment(subject) {
+    return `${this.name} has submitted a PE for ${subject}`;
+  }
+  sprintChallenge(subject) {
+    return `${this.name} has begun sprint challenge on ${subject}`;
+  }
+  graduate() {
+    if (this.grade >= 70) {
+      console.log("You graduated! Huzzah!");
+    } else {
+      console.log("lets take another look at some of these things");
+    }
+  }
+}
 
 /*
     TASK 6
@@ -178,7 +205,19 @@ class Student {}
           + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
           + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
   */
-class ProjectManager {}
+class ProjectManager extends Instructor {
+  constructor(args) {
+    super(args);
+    this.gradClassName = args.gradClassName;
+    this.favInstructor = args.favInstructor;
+  }
+  standUp(channel) {
+    return `${this.name} announces to ${channel}, @channel standy times!`;
+  }
+  debugsCode(studentObj, subject) {
+    return `${this.name} debugs ${studentObj.name}'s code on ${subject}`;
+  }
+}
 /*
     STRETCH PROBLEM (no tests!)
       - Extend the functionality of the Student by adding a prop called grade and setting it equal to a number between 1-100.
